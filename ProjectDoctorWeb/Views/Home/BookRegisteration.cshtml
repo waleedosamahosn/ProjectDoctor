@@ -1,0 +1,36 @@
+﻿@model PatientViewModel
+
+@inject IViewLocalizer localizer
+
+<form asp-action="AddPatient" asp-controller="Home" method="post">
+    <div class="row">
+        <div class="col-lg-6 col-12">
+            <input asp-for="Name" class="form-control" placeholder=@localizer["Full_name"] required>
+            <span asp-validation-for="Name"></span>
+        </div>
+
+        <div class="col-lg-6 col-12">
+            <input asp-for="Email" class="form-control" placeholder=@localizer["Email_address"] required>
+            <span asp-validation-for="Email"></span>
+        </div>
+
+        <div class="col-lg-6 col-12">
+            <input asp-for="Phone" class="form-control" placeholder=@localizer["Phone_Number"]>
+            <span asp-validation-for="Phone"></span>
+        </div>
+
+        <div class="col-lg-6 col-12">
+            <input asp-for="DateRegisteration" class="form-control">
+            <span asp-validation-for="DateRegisteration"></span>
+        </div>
+
+        <div class="col-12">
+            <textarea asp-for="Description" class="form-control" rows="5" placeholder=@localizer["Additional_Message"]></textarea>
+            <span asp-validation-for="Description"></span>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-6 mx-auto">
+            <button type="submit" class="form-control" id="submit-button"> @localizer["Book Now"] </button>
+        </div>
+    </div>
+</form>

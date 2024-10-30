@@ -1,0 +1,25 @@
+﻿@inject IViewLocalizer localizer
+@inject IOptions<RequestLocalizationOptions> localizationOptions
+
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+
+    var cultues = localizationOptions.Value.SupportedUICultures?.Select(x => new SelectListItem(){
+        Text = x.NativeName,
+        Value = x.Name
+    }).ToList();
+
+    var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
+}
+
+<div>
+    <form method="post" asp-action="SetLanguage" asp-controller="Language" asp-route-returnUrl="@returnUrl">
+        <select style="height: 30px;" 
+            name="culture"
+            asp-for="@requestCulture.RequestCulture.UICulture.Name"
+            asp-items="cultues"
+            onchange="this.form.submit();">
+
+        </select>
+    </form>
+</div>
